@@ -2,7 +2,7 @@ package automation_practice_website_taf.browser;
 
 import automation_practice_website_taf.driver.WebDriverHandler;
 import automation_practice_website_taf.AutomationPracticeWebsite;
-import org.openqa.selenium.Point;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,31 +13,23 @@ import java.time.Duration;
 
 public class Browser {
 
-    private final WebDriver webDriver = WebDriverHandler.getWebDriver();
-
     public AutomationPracticeWebsite automationPracticeWebsite;
 
-    public Browser() { automationPracticeWebsite = new AutomationPracticeWebsite(); }
-
-    public void swipeTo(WebElement targetElement) {
-        Actions actions = new Actions(webDriver);
-        actions.dragAndDropBy(targetElement, 200, 0).build().perform();
+    public Browser() {
+        automationPracticeWebsite = new AutomationPracticeWebsite();
     }
 
-    public int getXCoordinate(WebElement element) {
-        Point elementPoint = element.getLocation();
-        return elementPoint.getX();
+    public boolean elementIsDisplayed (WebElement element)
+    {
+       try{
+           return element.isDisplayed();
+       }catch (Exception e) {
+           return false;
+       }
     }
 
-    public boolean  waitTillTextToBePresentInElement(WebElement elementToBeDisplayed, String textToBeCompared) {
-        try{
-            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
-            wait.until(ExpectedConditions.textToBePresentInElement(elementToBeDisplayed, textToBeCompared));
-        }catch (Exception e){
-            return false;
-        }
-        return true;
+    public static void waitUntilVisibilityOfElement(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(WebDriverHandler.getWebDriver(), Duration.ofSeconds(35));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
-
 }
-

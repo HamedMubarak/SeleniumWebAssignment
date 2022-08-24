@@ -1,27 +1,32 @@
 package automation_practice_website_taf.tests;
 
+import automation_practice_website_taf.base_test.BaseTest;
 import automation_practice_website_taf.browser.Browser;
 import automation_practice_website_taf.driver.WebDriverHandler;
+import automation_practice_website_taf.utilities.ConfigProperties;
+import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Before;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.List;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-
 
 public class HooksHandler extends BaseTest {
 
-    @BeforeSuite
-    public void setUpAutomationPracticeWebsite () throws IOException {
+    @Before()
+    public void setUpAutomationPracticeWebsite() throws IOException {
         webDriverHandler = new WebDriverHandler();
-        BaseTest.browser = new Browser();
-        webDriverHandler.navigateTo("http://automationpractice.com/index.php");
+        browser = new Browser();
+        testData = new ConfigProperties("resources/Data.properties");
+        configBrowser = new ConfigProperties("resources/configBrowser.properties");
+        webDriverHandler.navigateToUrl(configBrowser.getProperty("url"));
     }
-
-    @AfterSuite
-    public void closeDriver()
-    {
+    @AfterStep()
+    public void waitTillVisibiltyOfPage() throws InterruptedException {
+        Thread.sleep(150);
+    }
+    @After()
+    public void closeAutomationPracticeWebsite() {
+        webDriverHandler.resetCache();
         webDriverHandler.close();
     }
 

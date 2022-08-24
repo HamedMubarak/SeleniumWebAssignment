@@ -1,21 +1,16 @@
 package automation_practice_website_taf.pages;
 
+import automation_practice_website_taf.base_page.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class OrderHistory extends BasePage {
 
-    @FindBy(id="center_column")
-    public WebElement orderHistoryTableInOrderHistoryPage;
+    @FindBy(xpath="//*[@id=\"order-list\"]/thead/tr/th[1]")
+    public WebElement orderReferenceColumnHeaderInOrderHistoryPage;
 
-    @FindBy(xpath="//a[@class='color-myaccount']")
-    public WebElement orderReferenceInOrderHistoryPage;
-
-    public WebElement getOrderReferenceInOrderHistoryPage() {
-        return orderReferenceInOrderHistoryPage;
+    public WebElement getOrderReferenceColumnHeaderInOrderHistoryPage() {
+        return orderReferenceColumnHeaderInOrderHistoryPage;
     }
 
-    public void orderIsPlacedSucceffully(String orderReference) {
-
-    }
 }

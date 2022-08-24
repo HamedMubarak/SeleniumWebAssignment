@@ -1,14 +1,13 @@
 package automation_practice_website_taf.pages;
 
+import automation_practice_website_taf.base_page.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CheckOut extends BasePage {
 
-    @FindBy(id="cart_title")
-    public WebElement shoppingCartTitleInCheckOutPage;
 
-    @FindBy(xpath="//a[@class='button btn btn-default standard-checkout button-medium']")
+    @FindBy(xpath="//*[@id=\"center_column\"]/p[2]/a[1]/span")
     WebElement summaryProceedToCheckOutButtonInCheckOutPage;
 
     @FindBy(xpath="//button[@name='processAddress']")
@@ -26,24 +25,41 @@ public class CheckOut extends BasePage {
     @FindBy(xpath="//button[@class='button btn btn-default button-medium']")
     WebElement iConfirmMyOrderButtonInCheckOutPage;
 
-    @FindBy(xpath="//h1[@class='page-heading']")
-    public WebElement orderConfirmationTitleInCheckOutPage;
-
-    @FindBy(xpath="//a[@title='Back to orders']")
-    WebElement ordersHistoryLinkInCheckOutPage;
-
     @FindBy(xpath="//div[@class='box']")
     WebElement orderReferenceMessageInCheckOutPage;
 
-    public OrderHistory checkOutProcedure() {
+    @FindBy(xpath="//span[@class='navigation_page']")
+    WebElement pagesNavigator;
+
+    public WebElement getPagesNavigator() {
+        return pagesNavigator;
+    }
+
+    public WebElement getOrderReferenceMessageInCheckOutPage() {
+        return orderReferenceMessageInCheckOutPage;
+    }
+
+    public  void clickOnSummaryProceedToCheckOutButtonInCheckOutPage() {
         summaryProceedToCheckOutButtonInCheckOutPage.click();
+    }
+
+    public  void clickOnAddressProceedToCheckOutButtonInCheckOutPage() {
         addressProcessToCheckOutButtonInCheckOutPage.click();
+    }
+
+    public void clickOnTermsCheckBoxInCheckOutPage() {
         termsCheckBoxInCheckOutPage.click();
+    }
+
+    public void clickOnShippingProcessToCheckOutButtonInCheckOutPage() {
         shippingProcessToCheckOutButtonInCheckOutPage.click();
+    }
+    public  void clickOnPayByBankWireButtonInCheckOutPage() {
         payByBankWireButtonInCheckOutPage.click();
+    }
+
+    public void clickOniConfirmMyOrderButtonInCheckOutPage() {
         iConfirmMyOrderButtonInCheckOutPage.click();
-        ordersHistoryLinkInCheckOutPage.click();
-        return new OrderHistory();
     }
 
 }
